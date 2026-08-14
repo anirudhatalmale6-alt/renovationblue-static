@@ -117,6 +117,18 @@ appear in the Netlify dashboard. No server, no PHP, no plugin.
 
 ---
 
+## 404 page
+
+`404.html` is deliberately **self-contained** — styles inline, logo embedded as a
+data URI. A 404 can be served at any URL depth (`/about/`,
+`/projects/coogee-project/`), so a linked stylesheet or image would resolve
+against the wrong folder and the page would render unstyled. It also carries a
+small preview-only script that repoints the home link when the site is being
+viewed from a GitHub Pages project URL; delete that script once the site is on
+its own domain.
+
+Until the remaining pages are converted, the menu links resolve to this page.
+
 ## /compare/ — temporary
 
 `compare/` holds a phone-comparison page (side-by-side screenshots of the live
