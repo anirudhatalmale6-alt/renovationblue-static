@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://www.renovationblue.com.au/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <!-- Remaining pages are added as they are converted:
+       /about/  /services/  /your-assurance/  /projects/
+       /client-reviews/  /contact/  plus the individual project pages. -->
+</urlset>

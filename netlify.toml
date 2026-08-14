@@ -1,0 +1,47 @@
+#===============================================================================
+# Netlify configuration - Renovation Blue (static site)
+#
+# The site is plain HTML/CSS/JS, so there is no build step. Netlify just
+# publishes this folder as-is.
+#===============================================================================
+
+[build]
+  publish = "."
+  command = ""
+
+# Serve /about/ for /about, /about.html etc. and give clean URLs everywhere.
+[build.processing]
+  skip_processing = false
+
+#-------------------------------------------------------------------------------
+# Security + caching headers
+#-------------------------------------------------------------------------------
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "geolocation=(), microphone=(), camera=()"
+
+# Fingerprint-free assets, so keep the cache short enough to allow updates
+# but long enough to be fast on repeat visits.
+[[headers]]
+  for = "/assets/img/*"
+  [headers.values]
+    Cache-Control = "public, max-age=2592000"
+
+[[headers]]
+  for = "/assets/fonts/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/assets/css/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+
+[[headers]]
+  for = "/assets/js/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"

@@ -1,0 +1,755 @@
+/* ==========================================================================
+   Renovation Blue - main stylesheet
+   Static rebuild of the WordPress/Elementor site. No frameworks, no build step.
+
+   Contents
+   --------
+   1.  Design tokens
+   2.  Reset & base
+   3.  Layout helpers (container, section title, divider)
+   4.  Buttons
+   5.  Header + main navigation
+   6.  Mobile menu overlay
+   7.  Hero slider
+   8.  Intro section
+   9.  Feature cards
+   10. Call to action
+   11. Our commitment
+   12. Partners
+   13. Footer
+   14. Scroll-reveal animations
+   15. Responsive - tablet (<=1024px)
+   16. Responsive - phone (<=767px)
+   ========================================================================== */
+
+
+/* 1. Design tokens
+   ========================================================================== */
+:root {
+  /* Brand */
+  --color-blue:          #2560A7;  /* primary brand blue - buttons, card blocks */
+  --color-blue-light:    #0170B9;  /* logo blue - footer icons and links */
+  --color-blue-hover:    #1d4d86;
+
+  /* Neutrals */
+  --color-text:          #000000;
+  --color-text-muted:    #3A3A3A;
+  --color-white:         #ffffff;
+  --color-footer-bg:     #353537;
+  --color-footer-bar-bg: #000000;
+  --color-nav-dark:      rgba(0, 0, 0, 0.85);
+  --color-panel-overlay: rgba(5, 0, 0, 0.57);
+
+  /* Typography */
+  --font-body:      "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  --font-condensed: "Roboto Condensed", "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+
+  /* Layout */
+  --container-width:        1180px;   /* 1140px of content + 20px gutters */
+  --container-width-narrow: 1040px;   /* 1000px of content + 20px gutters */
+  --header-height:          130px;
+  --header-padding-x:       50px;
+
+  /* Motion */
+  --transition-fast: 0.3s ease;
+  --transition-slow: 0.8s ease;
+}
+
+
+/* 2. Reset & base
+   ========================================================================== */
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.857;
+  color: var(--color-text-muted);
+  background-color: var(--color-white);
+  overflow-x: hidden;
+}
+
+body.is-menu-open { overflow: hidden; }
+
+img { max-width: 100%; height: auto; display: block; border: 0; }
+
+a { color: inherit; text-decoration: none; }
+
+h1, h2, h3, h4, p, ul, figure { margin: 0; padding: 0; }
+
+ul { list-style: none; }
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 100000;
+  padding: 12px 20px;
+  background: var(--color-blue);
+  color: var(--color-white);
+}
+.skip-link:focus { left: 0; }
+
+:focus-visible { outline: 2px solid var(--color-blue-light); outline-offset: 2px; }
+
+
+/* 3. Layout helpers
+   ========================================================================== */
+.container {
+  width: 100%;
+  max-width: var(--container-width);
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.container--narrow { max-width: var(--container-width-narrow); }
+
+/* Section heading - "CHANGING LIFESTYLES...", "OUR PARTNERS" */
+.section-title {
+  font-family: var(--font-condensed);
+  font-size: 30px;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--color-text);
+  text-align: center;
+}
+
+/* The 3-rectangle blue rule under section headings */
+.divider {
+  width: 90px;
+  height: 8px;
+  margin: 15px auto;
+  background-image: repeating-linear-gradient(
+    to right,
+    var(--color-blue) 0,
+    var(--color-blue) 20px,
+    transparent 20px,
+    transparent 30px
+  );
+}
+
+
+/* 4. Buttons
+   ========================================================================== */
+.btn {
+  display: inline-block;
+  font-family: var(--font-body);
+  text-align: center;
+  line-height: 1;
+  transition: background-color var(--transition-fast), color var(--transition-fast);
+}
+
+/* Header phone button */
+.btn--phone {
+  padding: 15px 30px;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--color-white);
+  background-color: var(--color-blue);
+  border-radius: 4px;
+}
+.btn--phone:hover { background-color: var(--color-blue-hover); }
+
+/* Translucent hero button */
+.btn--hero {
+  padding: 20px 40px;
+  font-size: 24px;
+  font-weight: 500;
+  color: var(--color-text);
+  background-color: rgba(255, 255, 255, 0.61);
+  border-radius: 1px;
+}
+.btn--hero:hover { background-color: rgba(255, 255, 255, 0.85); }
+
+/* Solid blue call-to-action buttons */
+.btn--solid {
+  padding: 20px;
+  min-width: 180px;
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--color-white);
+  background-color: var(--color-blue);
+  border-radius: 5px;
+}
+.btn--solid:hover { background-color: var(--color-blue-hover); }
+
+/* Outlined button on the dark commitment panel */
+.btn--outline {
+  padding: 15px 30px;
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--color-white);
+  background-color: transparent;
+  border: 1px solid var(--color-white);
+  border-radius: 4px;
+}
+.btn--outline:hover { background-color: var(--color-white); color: var(--color-text); }
+
+
+/* 5. Header + main navigation
+   ========================================================================== */
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  padding: 0 var(--header-padding-x);
+  background-color: transparent;
+  transition: background-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.site-header__inner {
+  display: flex;
+  align-items: center;
+  min-height: var(--header-height);
+}
+
+.site-header__logo img { width: 118px; height: auto; }
+
+.site-nav {
+  margin-left: auto;
+  margin-right: 11px;
+}
+
+.site-nav__list { display: flex; align-items: center; }
+
+.site-nav__list a {
+  display: block;
+  padding: 10px 0;
+  margin: 0 20px;
+  font-family: var(--font-condensed);
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 20px;
+  color: var(--color-white);
+  transition: color var(--transition-fast), opacity var(--transition-fast);
+}
+.site-nav__list a:hover { opacity: 0.7; }
+
+/* Scrolled state - solid white bar with dark links */
+.site-header.is-scrolled {
+  background-color: var(--color-white);
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.08);
+}
+.site-header.is-scrolled .site-nav__list a { color: var(--color-nav-dark); }
+.site-header.is-scrolled .nav-toggle span { background-color: var(--color-nav-dark); }
+
+/* Hamburger - hidden on desktop, shown from 1024px down */
+.nav-toggle {
+  display: none;
+  margin-left: auto;
+  width: 34px;
+  height: 26px;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.nav-toggle span {
+  display: block;
+  height: 4px;
+  width: 100%;
+  background-color: var(--color-blue-light);
+  border-radius: 1px;
+  transition: background-color var(--transition-fast);
+}
+
+
+/* 6. Mobile menu overlay
+   ========================================================================== */
+.mobile-menu {
+  position: fixed;
+  inset: 0;
+  z-index: 100000;
+  background-color: var(--color-white);
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+}
+.mobile-menu.is-open { opacity: 1; }
+.mobile-menu[hidden] { display: none; }
+
+.mobile-menu__close {
+  position: absolute;
+  top: 18px;
+  right: 24px;
+  width: 32px;
+  height: 32px;
+}
+.mobile-menu__close svg {
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke: var(--color-text);
+  stroke-width: 2;
+}
+
+.mobile-menu__nav {
+  padding: 110px 25% 0;
+}
+.mobile-menu__nav a {
+  display: block;
+  padding: 21px 0;
+  font-family: var(--font-condensed);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--color-text);
+}
+
+
+/* 7. Hero slider
+   ========================================================================== */
+.hero {
+  position: relative;
+  height: 100vh;
+  min-height: 520px;
+  overflow: hidden;
+}
+
+.hero__slides { position: absolute; inset: 0; }
+
+.hero__slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 1s ease, visibility 1s ease;
+}
+.hero__slide.is-active { opacity: 1; visibility: visible; }
+
+.hero__bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* Padded frame around the slide, then the 66%-wide content box inside it -
+   the same two-box structure the original slider used. */
+.hero__inner {
+  position: relative;
+  height: 100%;
+  padding: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero__content {
+  max-width: 66%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+}
+
+.hero__heading {
+  font-family: var(--font-body);
+  font-size: 62px;
+  font-weight: 600;
+  line-height: 1;
+  color: var(--color-white);
+  margin-bottom: 40px;
+}
+
+.hero__arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  width: 30px;
+  height: 30px;
+  color: var(--color-white);
+}
+.hero__arrow svg {
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.4));
+}
+.hero__arrow--prev { left: 15px; }
+.hero__arrow--next { right: 15px; }
+.hero__arrow:hover { opacity: 0.75; }
+
+
+/* 8. Intro section
+   ========================================================================== */
+.intro { padding: 50px 0; }
+
+/* Flex column: Elementor spaces widgets with plain margins that never collapse,
+   so a flex context reproduces its rhythm exactly. */
+.intro .container,
+.partners .container {
+  display: flex;
+  flex-direction: column;
+}
+
+.intro__text {
+  display: flow-root;   /* contains the paragraph margins */
+  margin-top: 20px;
+  font-size: 18px;
+  line-height: 1.857;
+  color: var(--color-text);
+  text-align: center;
+}
+.intro__text p { margin-bottom: 1.6em; }
+
+
+/* 9. Feature cards
+   ========================================================================== */
+.cards__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.card {
+  display: block;
+  background-color: var(--color-blue);
+}
+
+.card__img {
+  width: 100%;
+  aspect-ratio: 4 / 3;   /* 560x420 on desktop, scales with the card */
+  height: auto;
+  object-fit: cover;
+  transition: opacity var(--transition-fast);
+}
+.card:hover .card__img { opacity: 0.9; }
+
+.card__title {
+  font-family: var(--font-body);
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--color-white);
+  text-align: center;
+  margin: 24px 0 20px;
+}
+
+
+/* 10. Call to action
+   ========================================================================== */
+.cta { padding: 70px 0; }
+.cta .container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+
+/* 11. Our commitment
+   ========================================================================== */
+.commitment {
+  position: relative;
+  background-image: url("../img/commitment-bg.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 1100px;      /* the photo band keeps a fixed height... */
+  display: flex;
+  align-items: center;     /* ...and the panel is centred inside it */
+}
+
+.commitment__panel {
+  width: 50%;
+  padding: 60px;
+  background-color: var(--color-panel-overlay);
+  color: var(--color-white);
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.commitment__title {
+  font-family: var(--font-condensed);
+  font-size: 38px;
+  font-weight: 600;
+  line-height: 1.3;
+  margin-bottom: 20px;
+}
+
+.commitment__subtitle {
+  font-family: var(--font-condensed);
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 1.3;
+  margin-bottom: 20px;
+}
+
+.commitment__panel p {
+  font-size: 18px;
+  line-height: 1.6;
+  margin-bottom: 48.8px;   /* 1.6em paragraph spacing + 20px widget gap */
+}
+
+.commitment__panel .btn { align-self: flex-start; }
+
+
+/* 12. Partners
+   ========================================================================== */
+.partners { padding: 120px 0; }
+.partners .section-title { margin-bottom: 20px; }
+
+/* The partners heading sits on a tighter line-height than the intro heading -
+   that difference exists on the live site, so it is preserved here. */
+.partners .section-title { line-height: 1; }
+
+.partners__grid {
+  margin-top: 20px;
+  padding: 0 10px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  align-items: center;
+  gap: 0;
+}
+.partners__grid img {
+  width: 100%;
+  max-width: 260px;
+  height: auto;
+  margin: 0 auto;
+}
+
+
+/* 13. Footer
+   ========================================================================== */
+.site-footer__main {
+  background-color: var(--color-footer-bg);
+  color: var(--color-white);
+  padding: 100px 0;
+}
+
+.site-footer__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+}
+
+.site-footer__col { padding: 10px 20px; }
+.site-footer__col > * { margin-bottom: 20px; }
+.site-footer__col > *:last-child { margin-bottom: 0; }
+
+.site-footer__heading {
+  font-family: var(--font-condensed);
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1;
+  color: var(--color-white);
+}
+/* "CONTACT INFO" is set in Roboto on the live site - kept as-is */
+.site-footer__heading--roboto { font-family: var(--font-body); }
+
+
+
+
+.site-footer__col p {
+  font-size: 18px;
+  line-height: 1.857;
+  color: var(--color-white);
+}
+
+.footer-list li {
+  font-size: 18px;
+  line-height: 1.857;
+  color: var(--color-white);
+}
+.footer-list a { transition: color var(--transition-fast); }
+.footer-list a:hover { color: var(--color-blue-light); }
+
+.footer-list--icons li {
+  display: flex;
+  align-items: center;
+  padding-bottom: 20px;
+}
+.footer-list--icons li:last-child { padding-bottom: 0; }
+.footer-list__icon {
+  flex: 0 0 14px;
+  width: 14px;
+  margin: 0 5px 0 0;
+  line-height: 0;   /* no line box, so the icon never grows the row */
+}
+.footer-list__icon svg {
+  display: block;
+  width: 14px;
+  height: 14px;
+  fill: var(--color-blue-light);
+}
+
+
+.footer-nav a {
+  display: block;
+  padding: 5px 0;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 20px;
+  color: var(--color-white);
+  transition: color var(--transition-fast);
+}
+.footer-nav a:hover { color: var(--color-blue-light); }
+
+
+.site-footer__legal p { font-size: 18px; line-height: 1.857; }
+
+/* Bottom bar */
+.site-footer__bar {
+  background-color: var(--color-footer-bar-bg);
+  color: var(--color-white);
+}
+.site-footer__bar .container {
+  min-height: 36px;
+  padding: 0 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+.site-footer__copyright,
+.site-footer__credit {
+  font-family: var(--font-condensed);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1;
+  color: var(--color-white);
+}
+.site-footer__credit a { text-decoration: none; }
+.site-footer__credit a:hover { color: var(--color-blue-light); }
+
+
+/* 14. Scroll-reveal animations
+   Mirrors the Elementor entrance animations (fadeIn / bounceInUp).
+   Elements start hidden and get .is-visible from main.js via IntersectionObserver.
+   ========================================================================== */
+.reveal {
+  opacity: 0;
+  transition: opacity var(--transition-slow), transform var(--transition-slow);
+}
+.reveal.is-visible { opacity: 1; transform: none; }
+
+.reveal--bounce { transform: translateY(40px); }
+
+/* No JS / reduced motion - never leave content invisible */
+.no-js .reveal,
+html:not(.js) .reveal { opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+  .reveal { opacity: 1; transform: none; }
+}
+
+
+/* 15. Responsive - tablet (<=1024px)
+   Below the desktop breakpoint the original drops its fixed container widths and
+   goes fluid: full-bleed sections, hamburger menu, larger logo.
+   ========================================================================== */
+@media (max-width: 1024px) {
+  :root {
+    --header-height: 100px;
+    --header-padding-x: 20px;
+  }
+
+  .site-header__logo img { width: 180px; }
+
+  .site-nav,
+  .btn--phone { display: none; }
+  .nav-toggle { display: flex; }
+
+  /* Fluid, full-width sections */
+  .container,
+  .container--narrow {
+    max-width: 100%;
+    padding: 0;
+  }
+
+  .partners .container { padding: 0 20px; }
+
+  .cards__grid { gap: 20px; }
+
+  .commitment__panel { width: 80%; }
+
+  .partners__grid {
+    padding: 0;
+    gap: 20px;
+    max-width: none;
+  }
+  .partners__grid img { max-width: none; }
+
+  .site-footer__bar .container { padding: 0 10px; }
+}
+
+
+/* 16. Responsive - phone (<=767px)
+   ========================================================================== */
+@media (max-width: 767px) {
+  :root { --header-padding-x: 10px; }
+
+  /* Hero */
+  .hero__inner { padding: 20px; }
+  .hero__content { max-width: 90%; }
+  .hero__heading { font-size: 32px; margin-bottom: 40px; }
+  .btn--hero { font-size: 14px; padding: 20px 40px; }
+  .hero__arrow--prev { left: 6px; }
+  .hero__arrow--next { right: 6px; }
+
+  /* Intro */
+  .intro { padding: 50px 10px; }
+  .section-title { font-size: 22px; }
+  .intro__text { font-size: 16px; }
+
+  /* Cards stack */
+  .cards .container { padding: 10px; }
+  .cards__grid { grid-template-columns: 1fr; }
+  .card__title { font-size: 22px; }
+
+  /* Commitment */
+  .commitment { min-height: 250px; }
+  .commitment__panel { width: 100%; padding: 70px 20px; }
+  .commitment__title,
+  .commitment__subtitle { font-size: 22px; text-align: center; }
+  .commitment__panel p { font-size: 16px; text-align: center; }
+  .commitment__panel .btn { align-self: center; }
+
+  /* Call to action */
+  .cta { padding: 40px 0; }
+
+  /* Partners stack */
+  .partners { padding: 50px 0; }
+  .partners .container { padding: 10px; }
+  .partners .section-title { font-size: 24px; }
+  .partners__grid { grid-template-columns: 1fr; }
+
+  /* Footer stacks into one column */
+  .site-footer__main { padding: 50px 0; }
+  .site-footer__grid { grid-template-columns: 1fr; gap: 0; }
+  .site-footer__col { padding: 10px; }
+
+  .site-footer__col p { font-size: 16px; }
+
+  .site-footer__bar .container {
+    flex-direction: column;
+    justify-content: center;
+    padding: 30px 10px;
+    gap: 0;
+    text-align: center;
+  }
+  .site-footer__copyright,
+  .site-footer__credit { padding: 10px 0; }
+}
