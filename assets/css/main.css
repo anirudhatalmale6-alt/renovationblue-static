@@ -711,8 +711,9 @@ html:not(.js) .reveal { opacity: 1; transform: none; }
 @media (max-width: 767px) {
   :root { --header-padding-x: 10px; }
 
-  /* Hero */
-  .hero__inner { padding: 20px; }
+  /* Hero. 10px of padding, not 20 - with 20 the heading runs out of room at
+     384px and breaks onto two lines where the original still fits it on one. */
+  .hero__inner { padding: 10px; }
   .hero__content { max-width: 90%; }
   .hero__heading { font-size: 32px; margin-bottom: 40px; }
   .btn--hero { font-size: 14px; padding: 20px 40px; }
