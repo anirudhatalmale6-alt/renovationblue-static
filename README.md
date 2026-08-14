@@ -117,6 +117,12 @@ appear in the Netlify dashboard. No server, no PHP, no plugin.
 
 ---
 
+## /compare/ — temporary
+
+`compare/` holds a phone-comparison page (side-by-side screenshots of the live
+WordPress site and this build) used during review. It is `noindex`ed and is not
+part of the site. Delete the folder before the final handover.
+
 ## Notes on the original site
 
 Three things were carried across exactly as they appear on the live site rather

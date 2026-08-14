@@ -744,7 +744,11 @@ html:not(.js) .reveal { opacity: 1; transform: none; }
   /* On phone the whole footer centres - headings, logo, paragraphs, contact
      rows and the explore links all sit on the centre line. */
   .site-footer__col { text-align: center; }
-  .site-footer__about { font-size: 16px; }   /* the legal lines stay at 18px */
+  /* Phone-only footer type: the about paragraph drops to 16px while the
+     licence lines stay at 18px, and the ABOUT US heading steps up to 22px.
+     Both quirks are how the original renders below 767px. */
+  .site-footer__col .site-footer__about { font-size: 16px; }
+  .site-footer__heading--about { font-size: 22px; }
   .site-footer__logo { margin-left: auto; margin-right: auto; }
   /* The original keeps the contact rows narrow so the address and PO box wrap
      onto two lines and the icons sit beside the text rather than at the edge. */
