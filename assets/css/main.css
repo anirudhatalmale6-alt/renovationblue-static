@@ -26,6 +26,11 @@
 /* 1. Design tokens
    ========================================================================== */
 :root {
+  /* Opt out of the browser's forced dark mode. Samsung Internet and Chrome on
+     Android will otherwise repaint a light site - white turns black and the
+     brand blue is darkened - which is not what this design should look like. */
+  color-scheme: only light;
+
   /* Brand */
   --color-blue:          #2560A7;  /* primary brand blue - buttons, card blocks */
   --color-blue-light:    #0170B9;  /* logo blue - footer icons and links */
