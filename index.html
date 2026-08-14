@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<!-- The site is a light design. Without this, Android/Samsung "dark mode"
-     repaints the page: white backgrounds go black and the brand blue is
-     darkened. "only light" opts out of that forced inversion. -->
-<meta name="color-scheme" content="light">
+<!-- The site is a light design and handles dark mode itself (see section 17
+     of main.css). Declaring dark support is what stops Samsung Internet and
+     Chrome on Android repainting the page black. -->
+<meta name="color-scheme" content="light dark">
 <meta name="theme-color" content="#ffffff">
 
 <title>Renovation Blue &ndash; We provide quality home renovations, home extensions and first floor additions that transform a house to a home</title>
@@ -30,8 +30,8 @@
 <!-- Styles -->
 <link rel="preload" href="assets/fonts/roboto-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/robotocondensed-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/css/fonts.css?v=7">
-<link rel="stylesheet" href="assets/css/main.css?v=7">
+<link rel="stylesheet" href="assets/css/fonts.css?v=8">
+<link rel="stylesheet" href="assets/css/main.css?v=8">
 
 <script type="application/ld+json">
 {
@@ -349,6 +349,6 @@
 
 </footer>
 
-<script src="assets/js/main.js?v=7" defer></script>
+<script src="assets/js/main.js?v=8" defer></script>
 </body>
 </html>

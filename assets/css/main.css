@@ -20,16 +20,17 @@
    14. Scroll-reveal animations
    15. Responsive - tablet (<=1024px)
    16. Responsive - phone (<=767px)
+   17. Dark mode - keep the light design
    ========================================================================== */
 
 
 /* 1. Design tokens
    ========================================================================== */
 :root {
-  /* Opt out of the browser's forced dark mode. Samsung Internet and Chrome on
-     Android will otherwise repaint a light site - white turns black and the
-     brand blue is darkened - which is not what this design should look like. */
-  color-scheme: only light;
+  /* Declare that this page handles dark mode itself (section 17), which is what
+     stops Samsung Internet and Chrome on Android repainting a light site.
+     "only light" is not enough - Samsung ignores it and inverts anyway. */
+  color-scheme: light dark;
 
   /* Brand */
   --color-blue:          #2560A7;  /* primary brand blue - buttons, card blocks */
@@ -792,4 +793,97 @@ html:not(.js) .reveal { opacity: 1; transform: none; }
   .site-footer__copyright,
   .site-footer__credit { padding: 10px 0; }
   .site-footer__copyright { max-width: 70%; margin-left: auto; margin-right: auto; }
+}
+
+
+/* 17. Dark mode - keep the light design
+   ==========================================================================
+   Phone browsers (Samsung Internet, Chrome on Android) will repaint a light
+   site when the user has dark mode on: white turns black and the brand blue
+   is darkened. `color-scheme: only light` alone does not stop Samsung
+   Internet - it only backs off when a site declares its own dark theme.
+
+   So this block declares one, and deliberately restates the light palette.
+   The site is a light design and should look the same either way, which is
+   what the original looks like with dark mode off.
+   ========================================================================== */
+@media (prefers-color-scheme: dark) {
+
+  html,
+  body {
+    background-color: var(--color-white);
+    color: var(--color-text-muted);
+  }
+
+  /* Header */
+  .site-header { background-color: transparent; }
+  .site-header.is-scrolled { background-color: var(--color-white); }
+  .site-nav__list a { color: var(--color-white); }
+  .site-header.is-scrolled .site-nav__list a { color: var(--color-nav-dark); }
+  .nav-toggle svg { fill: var(--color-burger); }
+
+  /* Mobile menu overlay */
+  .mobile-menu { background-color: var(--color-white); }
+  .mobile-menu__nav a { color: var(--color-text); }
+  .mobile-menu__close svg { stroke: var(--color-text); }
+
+  /* Hero */
+  .hero__heading { color: var(--color-white); }
+  .hero__arrow { color: var(--color-white); }
+
+  /* Buttons */
+  .btn--phone,
+  .btn--solid {
+    background-color: var(--color-blue);
+    color: var(--color-white);
+  }
+  .btn--hero {
+    background-color: rgba(255, 255, 255, 0.61);
+    color: var(--color-text);
+  }
+  .btn--outline {
+    background-color: transparent;
+    color: var(--color-white);
+    border-color: var(--color-white);
+  }
+
+  /* Sections */
+  .intro,
+  .cta,
+  .partners { background-color: var(--color-white); }
+  .section-title { color: var(--color-text); }
+  .intro__text { color: var(--color-text); }
+  .divider {
+    background-image: repeating-linear-gradient(
+      to right,
+      var(--color-blue) 0,
+      var(--color-blue) 20px,
+      transparent 20px,
+      transparent 30px
+    );
+  }
+
+  /* Feature cards */
+  .card { background-color: var(--color-blue); }
+  .card__title { color: var(--color-white); }
+
+  /* Our commitment */
+  .commitment__panel {
+    background-color: var(--color-panel-overlay);
+    color: var(--color-white);
+  }
+  .commitment__title,
+  .commitment__subtitle,
+  .commitment__panel p { color: var(--color-white); }
+
+  /* Footer */
+  .site-footer__main { background-color: var(--color-footer-bg); }
+  .site-footer__bar { background-color: var(--color-footer-bar-bg); }
+  .site-footer__heading,
+  .site-footer__col p,
+  .footer-list li,
+  .footer-nav a,
+  .site-footer__copyright,
+  .site-footer__credit { color: var(--color-white); }
+  .footer-list__icon svg { fill: var(--color-blue-light); }
 }

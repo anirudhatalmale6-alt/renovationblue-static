@@ -135,6 +135,18 @@ Until the remaining pages are converted, the menu links resolve to this page.
 WordPress site and this build) used during review. It is `noindex`ed and is not
 part of the site. Delete the folder before the final handover.
 
+## Dark mode
+
+Phone browsers (Samsung Internet, Chrome on Android) repaint a light website
+when the user has dark mode switched on — white turns black, brand colours are
+darkened. `color-scheme: only light` does **not** stop Samsung Internet; it only
+backs off when a site declares its own dark theme.
+
+So section 17 of `main.css` declares one, and deliberately restates the light
+palette inside it. The site is a light design and now looks the same with dark
+mode on or off. The original WordPress site does not do this, so it still goes
+black on the same phone.
+
 ## Notes on the original site
 
 Three things were carried across exactly as they appear on the live site rather
