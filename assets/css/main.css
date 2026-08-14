@@ -496,7 +496,9 @@ button {
 .commitment__panel p {
   font-size: 18px;
   line-height: 1.6;
-  margin-bottom: 48.8px;   /* 1.6em paragraph spacing + 20px widget gap */
+  /* 1.6em of paragraph spacing plus the 20px widget gap. Kept relative so it
+     tracks the smaller 16px type on phone instead of staying at the 18px value. */
+  margin-bottom: calc(1.6em + 20px);
 }
 
 .commitment__panel .btn { align-self: flex-start; }
@@ -569,6 +571,8 @@ button {
   line-height: 1.857;
   color: var(--color-white);
 }
+.footer-list--icons li > a,
+.footer-list--icons li > span:not(.footer-list__icon) { padding-left: 5px; }
 .footer-list a { transition: color var(--transition-fast); }
 .footer-list a:hover { color: var(--color-blue-light); }
 
@@ -579,9 +583,9 @@ button {
 }
 .footer-list--icons li:last-child { padding-bottom: 0; }
 .footer-list__icon {
-  flex: 0 0 14px;
-  width: 14px;
-  margin: 0 5px 0 0;
+  flex: 0 0 28px;
+  width: 28px;
+  margin: 0;
   line-height: 0;   /* no line box, so the icon never grows the row */
 }
 .footer-list__icon svg {
@@ -690,7 +694,7 @@ html:not(.js) .reveal { opacity: 1; transform: none; }
     gap: 20px;
     max-width: none;
   }
-  .partners__grid img { max-width: none; }
+  .partners__grid img { max-width: 664px; }   /* natural size - never upscale */
 
   .site-footer__bar .container { padding: 0 10px; }
 }
@@ -747,13 +751,28 @@ html:not(.js) .reveal { opacity: 1; transform: none; }
   /* Phone-only footer type: the about paragraph drops to 16px while the
      licence lines stay at 18px, and the ABOUT US heading steps up to 22px.
      Both quirks are how the original renders below 767px. */
-  .site-footer__col .site-footer__about { font-size: 16px; }
-  .site-footer__heading--about { font-size: 22px; }
-  .site-footer__logo { margin-left: auto; margin-right: auto; }
-  /* The original keeps the contact rows narrow so the address and PO box wrap
-     onto two lines and the icons sit beside the text rather than at the edge. */
-  .footer-list--icons { max-width: 260px; margin-left: auto; margin-right: auto; }
-  .footer-list--icons li { justify-content: center; }
+  .site-footer__col .site-footer__about { font-size: 16px; margin-bottom: 1.75em; }
+  .site-footer__heading--about { font-size: 22px; margin-bottom: 40px; }
+  .site-footer__logo {
+    width: 45%;          /* scales with the phone, as on the original */
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  /* Contact rows are 60% of the column width and centred - measured off the
+     original at 360, 390, 412, 430, 540 and 767px, where it holds exactly.
+     Keep it as a percentage: a fixed pixel width wraps badly on wider phones. */
+  .footer-list--icons li {
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: center;
+    /* 10px inside the row plus a 10px gap after it - that is how the original
+       spaces these on phone, and it is what sets the footer's height. */
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+  }
+  .footer-list--icons li:last-child { padding-bottom: 0; margin-bottom: 0; }
   .footer-nav a { text-align: center; }
 
   .site-footer__bar .container {
@@ -765,4 +784,5 @@ html:not(.js) .reveal { opacity: 1; transform: none; }
   }
   .site-footer__copyright,
   .site-footer__credit { padding: 10px 0; }
+  .site-footer__copyright { max-width: 70%; margin-left: auto; margin-right: auto; }
 }
