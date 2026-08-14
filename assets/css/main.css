@@ -34,6 +34,7 @@
   /* Brand */
   --color-blue:          #2560A7;  /* primary brand blue - buttons, card blocks */
   --color-blue-light:    #0170B9;  /* logo blue - footer icons and links */
+  --color-burger:        #009DDE;  /* mobile menu icon */
   --color-blue-hover:    #1d4d86;
 
   /* Neutrals */
@@ -250,24 +251,24 @@ button {
   box-shadow: 0 1px 6px rgba(0, 0, 0, 0.08);
 }
 .site-header.is-scrolled .site-nav__list a { color: var(--color-nav-dark); }
-.site-header.is-scrolled .nav-toggle span { background-color: var(--color-nav-dark); }
 
-/* Hamburger - hidden on desktop, shown from 1024px down */
+/* Hamburger - hidden on desktop, shown from 1024px down.
+   40x40 icon in --color-burger, and it stays that colour once the header turns
+   white; the original never darkens it. */
 .nav-toggle {
   display: none;
   margin-left: auto;
-  width: 34px;
-  height: 26px;
-  flex-direction: column;
-  justify-content: space-between;
+  margin-right: 10px;
+  width: 40px;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
 }
-.nav-toggle span {
+.nav-toggle svg {
   display: block;
-  height: 4px;
-  width: 100%;
-  background-color: var(--color-blue-light);
-  border-radius: 1px;
-  transition: background-color var(--transition-fast);
+  width: 40px;
+  height: 40px;
+  fill: var(--color-burger);
 }
 
 
