@@ -741,7 +741,13 @@ html:not(.js) .reveal { opacity: 1; transform: none; }
   .site-footer__grid { grid-template-columns: 1fr; gap: 0; }
   .site-footer__col { padding: 10px; }
 
-  .site-footer__col p { font-size: 16px; }
+  /* On phone the whole footer centres - headings, logo, paragraphs, contact
+     rows and the explore links all sit on the centre line. */
+  .site-footer__col { text-align: center; }
+  .site-footer__about { font-size: 16px; }   /* the legal lines stay at 18px */
+  .site-footer__logo { margin-left: auto; margin-right: auto; }
+  .footer-list--icons li { justify-content: center; }
+  .footer-nav a { text-align: center; }
 
   .site-footer__bar .container {
     flex-direction: column;
